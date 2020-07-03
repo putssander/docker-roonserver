@@ -22,8 +22,7 @@ Example start:
 Example restart always:
 
   docker run -d \
-    -p 9003:9003/udp \
-    -p 9100-9200:9100-9200/tcp \
+    --net=host \
     --name roonserver --restart always \
     -e TZ="Europe/Amsterdam" \
     -v roon-app:/app \
@@ -31,6 +30,15 @@ Example restart always:
     -v roon-music:/music \
     -v roon-backups:/backup \
     steefdebruijn/docker-roonserver:latest
+
+This how i configured my firewall to get it running:
+
+  firewall-cmd --permanent --zone=trusted --add-interface=docker0
+  firewall-cmd --permanent --zone=trusted --add-interface=eno1
+  firewall-cmd --permanent --zone=trusted --add-port=9003/udp
+  firewall-cmd --permanent --zone=trusted --add-port=3483/udp
+  firewall-cmd --permanent --zone=trusted --add-port=3483/tcp
+  firewall-cmd --permanent --zone=trusted --add-port=9000-9200/tcp    
 
 Example `systemd` service:
 
