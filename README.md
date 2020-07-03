@@ -19,6 +19,18 @@ Example start:
   * You can change the volume mappings to local file system paths if you like.
   * You should set up your library root to `/music` and configure backups to `/backup` on first run.
   
+Example restart always:
+
+  docker run -d \
+    -p 9003:9003/udp \
+    -p 9100-9200:9100-9200/tcp \
+    --name roonserver --restart always \
+    -e TZ="Europe/Amsterdam" \
+    -v roon-app:/app \
+    -v roon-data:/data \
+    -v roon-music:/music \
+    -v roon-backups:/backup \
+    steefdebruijn/docker-roonserver:latest
 
 Example `systemd` service:
 
