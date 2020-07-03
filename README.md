@@ -21,24 +21,24 @@ Example start:
   
 Example restart always:
 
-  docker run -d \
-    --net=host \
-    --name roonserver --restart always \
-    -e TZ="Europe/Amsterdam" \
-    -v roon-app:/app \
-    -v roon-data:/data \
-    -v roon-music:/music \
-    -v roon-backups:/backup \
-    steefdebruijn/docker-roonserver:latest
+      docker run -d \
+        --net=host \
+        --name roonserver --restart always \
+        -e TZ="Europe/Amsterdam" \
+        -v roon-app:/app \
+        -v roon-data:/data \
+        -v roon-music:/music \
+        -v roon-backups:/backup \
+        steefdebruijn/docker-roonserver:latest
 
 This how i configured my firewall to get it running:
 
-  firewall-cmd --permanent --zone=trusted --add-interface=docker0
-  firewall-cmd --permanent --zone=trusted --add-interface=eno1
-  firewall-cmd --permanent --zone=trusted --add-port=9003/udp
-  firewall-cmd --permanent --zone=trusted --add-port=3483/udp
-  firewall-cmd --permanent --zone=trusted --add-port=3483/tcp
-  firewall-cmd --permanent --zone=trusted --add-port=9000-9200/tcp    
+      firewall-cmd --permanent --zone=trusted --add-interface=docker0
+      firewall-cmd --permanent --zone=trusted --add-interface=eno1
+      firewall-cmd --permanent --zone=trusted --add-port=9003/udp
+      firewall-cmd --permanent --zone=trusted --add-port=3483/udp
+      firewall-cmd --permanent --zone=trusted --add-port=3483/tcp
+      firewall-cmd --permanent --zone=trusted --add-port=9000-9200/tcp    
 
 Example `systemd` service:
 
