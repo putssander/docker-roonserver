@@ -1,0 +1,14 @@
+version: '2'
+services:
+  roonserver:
+      image: steefdebruijn/docker-roonserver:latest
+      restart: always
+      environment:
+        - TZ="Europe/Amsterdam"
+      volumes:
+        - "./roon-app:/app"
+        - "./roon-data:/data"
+        - "./roon-music:/music"
+        - "./roon-backups:/backup"
+        - "./nfsmediamnt:/nfsmediamnt"
+      network_mode: "host"
